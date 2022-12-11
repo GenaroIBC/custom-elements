@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #232323;
+  color: #fff;
+
+  font-family: "Cascadia Code", sans-serif;
+  font-size: 2rem;
+}
+
+random-image {
+  background-color: #fff;
+  margin: 1rem;
+  border-radius: 50%;
+}
