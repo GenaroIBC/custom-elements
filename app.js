@@ -1,29 +1,49 @@
 class RandomImage extends HTMLElement {
+  static get observedAttributes() {
+    return ["size", "topic"];
+  }
+
+  #RANDOM_IMG_URL = "https://placeimg.com/30/30";
+
+  #SIZES = {
+    small: "100",
+    medium: "150",
+    large: "200",
+    huge: "250"
+  };
+
   constructor() {
     super();
   }
 
   connectedCallback() {
-    const sizesMap = {
-      small: "100",
-      medium: "150",
-      large: "200",
-      huge: "250"
-    };
-
-    const image = document.createElement("img");
-    const imageSrc = this.getAttribute("topic");
+    const topic = this.getAttribute("topic");
     const size = this.getAttribute("size");
+    const imageSrc = `${this.#RANDOM_IMG_URL}/${topic}`;
 
-    image.setAttribute("src", imageSrc);
-    image.setAttribute("width", sizesMap[size]);
+    const $image = document.createElement("img");
 
-    this.appendChild(image);
+    $image.setAttribute("src", imageSrc);
+    $image.setAttribute("width", this.#SIZES[size]);
+
+    this.appendChild($image);
   }
 
-  disconnectedCallback() {}
+  attributeChangedCallback(attributeName, oldValue, newValue) {
+    if (oldValue === newValue) return;
 
-  attributeChangedCallback(attributeName, oldValue, newValue) {}
+    if (attributeName === "size") {
+      const newSize = this.#SIZES[newValue];
+
+      this.querySelector("img").setAttribute("width", newSize);
+    }
+
+    if (attributeName === "topic") {
+      const newImageSrc = `${this.#RANDOM_IMG_URL}/${newValue}`;
+
+      this.querySelector("img").setAttribute("src", newImageSrc);
+    }
+  }
 }
 
 window.customElements.define("random-image", RandomImage);
