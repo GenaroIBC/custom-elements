@@ -9,6 +9,9 @@ body {
   justify-content: center;
   align-items: center;
 
+  padding: 0 1rem;
+  margin: 0;
+
   background-color: #232323;
   color: #fff;
 
@@ -17,7 +20,14 @@ body {
 }
 
 random-image {
-  background-color: #fff;
+  background-color: #eee;
   margin: 1rem;
   border-radius: 50%;
+  padding: 0.5%;
+}
+random-image img {
+  display: block;
+  border-radius: 50%;
+  object-fit: cover;
+  max-width: 100%;
 }
